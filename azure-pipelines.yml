@@ -35,7 +35,9 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'mv main.js index.js'
+    script: |
+      ls
+      mv "dist/angular-ssr-csr-hybrid/server/main.js" "dist/angular-ssr-csr-hybrid/server/index.js"
 
 - task: ArchiveFiles@2
   inputs:
