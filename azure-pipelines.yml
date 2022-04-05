@@ -35,7 +35,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'rename main.js index.js'
+    script: 'mv main.js index.js'
 
 - task: ArchiveFiles@2
   inputs:
