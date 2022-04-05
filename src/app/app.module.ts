@@ -50,13 +50,13 @@ if (typeof window !== 'undefined') {
         },
       }),
       {
-        interactionType: InteractionType.Redirect,
+        interactionType: InteractionType.Popup,
         authRequest: {
           scopes: ['user.read'],
         },
       },
       {
-        interactionType: InteractionType.Redirect, // MSAL Interceptor Configuration
+        interactionType: InteractionType.Popup, // MSAL Interceptor Configuration
         protectedResourceMap: new Map([
           ['Enter_the_Graph_Endpoint_Here/v1.0/me', ['user.read']],
         ]),
@@ -71,6 +71,6 @@ if (typeof window !== 'undefined') {
     },
     MsalGuard,
   ],
-  bootstrap: [AppComponent, MsalRedirectComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
