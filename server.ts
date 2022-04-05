@@ -11,7 +11,13 @@ import { existsSync } from 'fs';
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
-  const distFolder = join(process.cwd(), 'dist/angular-ssr-csr-hybrid/browser');
+
+  let distFolder = join(process.cwd(), 'browser');
+
+  if (!existsSync(distFolder)) {
+    distFolder = join(process.cwd(), 'dist/angular-ssr-csr-hybrid/browser');
+  }
+
   const indexHtml = existsSync(join(distFolder, 'index.original.html'))
     ? 'index.original.html'
     : 'index';
