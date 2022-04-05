@@ -29,7 +29,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'client/browser/dist/angular-ssr-csr-hybrid/browser'
+    SourceFolder: 'dist/browser/dist/angular-ssr-csr-hybrid/browser'
     Contents: '**'
     TargetFolder: 'client/browser/deploy-dist/browser'
 
