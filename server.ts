@@ -37,17 +37,16 @@ export function app(): express.Express {
     })
   );
 
-  server.get('/todo', (req, res) => {
-    console.log('not rendering auth page');
-    res.sendFile(distFolder + '/index.html');
-  });
-
   // All regular routes use the Universal engine
-  server.get('*', (req, res) => {
+  server.get('/home', (req, res) => {
     res.render(indexHtml, {
       req,
       providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }],
     });
+  });
+
+  server.get('*', (req, res) => {
+    res.sendFile(distFolder + '/index.html');
   });
 
   return server;

@@ -132,7 +132,7 @@
           "builder": "@nguniversal/builders:prerender",
           "options": {
             "guessRoutes": false,
-            "routes": ["/"]
+            "routes": []
           },
           "configurations": {
             "production": {
