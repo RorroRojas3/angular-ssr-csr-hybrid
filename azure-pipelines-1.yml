@@ -19,21 +19,15 @@ steps:
     npm install -g @angular/cli
     npm install
     npm run build:ssr
-    npm start
   displayName: 'npm install and build'
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/dist'
+    SourceFolder: '$(Build.SourcesDirectory)'
     Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/app/dist'
-- task: AzureRmWebAppDeployment@4
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+- task: PublishBuildArtifacts@1
   inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(290386d7-b5ac-433a-8c4c-db95cc6c36b4)'
-    appType: 'webApp'
-    WebAppName: 'angular-ssr-csr'
-    deployToSlotOrASE: true
-    ResourceGroupName: 'angular-ssr-csr'
-    SlotName: 'production'
-    packageForLinux: '$(Build.ArtifactStagingDirectory)/app'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
