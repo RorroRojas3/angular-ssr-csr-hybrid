@@ -23,26 +23,21 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/dist'
+    SourceFolder: 'dist/angular-ssr-csr-hybrid/server'
     Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/app/dist'
+    TargetFolder: 'client/angular-ssr-csr-hybrid/deploy-dist'
 - task: CopyFiles@2
   inputs:
-    SourceFolder: '$(Build.ArtifactStagingDirectory)/app/dist'
-    Contents: 'server.js'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/app'
-- task: DeleteFiles@1
+    SourceFolder: 'dist/angular-ssr-csr-hybrid/browser'
+    Contents: '**'
+    TargetFolder: 'client/angular-ssr-csr-hybrid/deploy-dist/browser'
+- task: CmdLine@2
   inputs:
-    SourceFolder: '$(Build.ArtifactStagingDirectory)/app/dist'
-    Contents: 'server.js'
-- task: AzureRmWebAppDeployment@4
+    script: 'mv "client/angular-ssr-csr-hybrid/deploy-dist/main.js" "client/angular-ssr-csr-hybrid/deploy-dist/index.js"'
+- task: ArchiveFiles@2
   inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure subscription 1(290386d7-b5ac-433a-8c4c-db95cc6c36b4)'
-    appType: 'webApp'
-    WebAppName: 'angular-ssr-csr'
-    deployToSlotOrASE: true
-    ResourceGroupName: 'angular-ssr-csr'
-    SlotName: 'production'
-    packageForLinux: '$(Build.ArtifactStagingDirectory)/app'
-    WebConfigParameters: '-Handler iisnode -NodeStartFile server.js -appType node'
+    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: 'client/angular-ssr-csr-hybrid/deploy-dist'
+    replaceExistingArchive: true
