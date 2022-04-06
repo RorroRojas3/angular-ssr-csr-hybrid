@@ -41,5 +41,11 @@ steps:
     azureSubscription: 'Azure subscription 1(290386d7-b5ac-433a-8c4c-db95cc6c36b4)'
     appType: 'webApp'
     WebAppName: 'angular-ssr-csr'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'angular-ssr-csr'
+    SlotName: 'production'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/app'
     WebConfigParameters: '-Handler iisnode -NodeStartFile server.js -appType node'
+    enableCustomDeployment: true
+    DeploymentType: 'webDeploy'
+    RemoveAdditionalFilesFlag: true
