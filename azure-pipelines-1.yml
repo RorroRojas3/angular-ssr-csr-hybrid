@@ -19,6 +19,7 @@ steps:
     npm install -g @angular/cli
     npm install
     npm run build:ssr
+    npm start
   displayName: 'npm install and build'
 
 - task: CopyFiles@2
@@ -37,4 +38,3 @@ steps:
     SlotName: 'production'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/app'
     ScriptType: 'Inline Script'
-    InlineScript: 'npm start'
