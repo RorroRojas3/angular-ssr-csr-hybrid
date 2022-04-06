@@ -36,11 +36,7 @@ steps:
 - task: CmdLine@2
   inputs:
     script: |
-      cd client
-      ls -a
-      cd angular-ssr-csr-hybrid
-      ls -a
-      mv "client/angular-ssr-csr-hybrid/server/main.js" "client/angular-ssr-csr-hybrid/server/index.js"
+      mv "dist/angular-ssr-csr-hybrid/server/main.js" "dist/angular-ssr-csr-hybrid/server/index.js"
 
 - task: ArchiveFiles@2
   inputs:
