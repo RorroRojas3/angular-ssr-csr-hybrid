@@ -36,3 +36,5 @@ steps:
     ResourceGroupName: 'angular-ssr-csr'
     SlotName: 'production'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/app'
+    ScriptType: 'Inline Script'
+    InlineScript: 'npm start'
