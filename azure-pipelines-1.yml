@@ -23,21 +23,16 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'dist/angular-ssr-csr-hybrid/server'
+    SourceFolder: '$(Build.SourcesDirectory)/dist'
     Contents: '**'
-    TargetFolder: 'client/angular-ssr-csr-hybrid/deploy-dist'
-- task: CopyFiles@2
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/app/dist'
+- task: AzureRmWebAppDeployment@4
   inputs:
-    SourceFolder: 'dist/angular-ssr-csr-hybrid/browser'
-    Contents: '**'
-    TargetFolder: 'client/angular-ssr-csr-hybrid/deploy-dist/browser'
-- task: CmdLine@2
-  inputs:
-    script: 'mv "client/angular-ssr-csr-hybrid/deploy-dist/main.js" "client/angular-ssr-csr-hybrid/deploy-dist/index.js"'
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(290386d7-b5ac-433a-8c4c-db95cc6c36b4)'
+    appType: 'webApp'
+    WebAppName: 'angular-ssr-csr'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'angular-ssr-csr'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
