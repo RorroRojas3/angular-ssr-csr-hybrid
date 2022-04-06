@@ -46,6 +46,3 @@ steps:
     SlotName: 'production'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/app'
     WebConfigParameters: '-Handler iisnode -NodeStartFile server.js -appType node'
-    enableCustomDeployment: true
-    DeploymentType: 'webDeploy'
-    RemoveAdditionalFilesFlag: true
