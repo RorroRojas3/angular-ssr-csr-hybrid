@@ -29,7 +29,7 @@ steps:
   inputs:
     SourceFolder: 'dist/angular-ssr-csr-hybrid/'
     Contents: '**'
-    TargetFolder: 'new-dist/dist/'
+    TargetFolder: 'new-dist/dist/angular-ssr-csr-hybrid/'
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/new-dist/'
