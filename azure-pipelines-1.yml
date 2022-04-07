@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  - group: Angular SSR & CSR - PROD
+
 steps:
 - task: NodeTool@0
   inputs:
@@ -20,6 +23,20 @@ steps:
     npm install
     npm run build:ssr
   displayName: 'npm install and build'
+- task: replacetokens@5
+  inputs:
+    rootDirectory: 'dist/angular-ssr-csr-hybrid/browser/'
+    targetFiles: 'main*.js'
+    encoding: 'auto'
+    tokenPattern: 'default'
+    writeBOM: true
+    actionOnMissing: 'warn'
+    keepToken: false
+    actionOnNoFiles: 'continue'
+    enableTransforms: false
+    enableRecursion: false
+    useLegacyPattern: false
+    enableTelemetry: true
 - task: CopyFiles@2
   inputs:
     SourceFolder: 'dist/angular-ssr-csr-hybrid/server/'
