@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { environment } from '../environments/environment.prod';
 
 import {
   MsalModule,
@@ -39,10 +40,9 @@ if (typeof window !== 'undefined') {
     MsalModule.forRoot(
       new PublicClientApplication({
         auth: {
-          clientId: 'Enter_the_Application_Id_Here',
-          authority:
-            'Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here',
-          redirectUri: 'Enter_the_Redirect_Uri_Here',
+          clientId: environment.clientId,
+          authority: environment.authority,
+          redirectUri: environment.redirectUri,
         },
         cache: {
           cacheLocation: 'localStorage',
@@ -58,7 +58,7 @@ if (typeof window !== 'undefined') {
       {
         interactionType: InteractionType.Popup, // MSAL Interceptor Configuration
         protectedResourceMap: new Map([
-          ['Enter_the_Graph_Endpoint_Here/v1.0/me', ['user.read']],
+          ['https://graph.microsoft.com/v1.0/me', ['user.read']],
         ]),
       }
     ),
